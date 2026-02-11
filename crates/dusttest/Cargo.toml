@@ -1,0 +1,16 @@
+[package]
+name = "dusttest"
+version = "0.1.0"
+edition = "2021"
+
+description = "Deterministic test harness for the Dust Programming Language (DPL)"
+license = "DOSL-1.0"
+readme = "README.md"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.5"
+rand = "0.8"
+
+[dev-dependencies]
+tempfile = "3.5"
