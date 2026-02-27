@@ -1,3 +1,13 @@
+// File: lib.rs - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   Core library for the `dusttest` test harness.
+//   Provides:
+//     - Test configuration file parsing
+//     - Deterministic seed sequence generation
+//     - Command execution under controlled seeds
+//     - Language-agnostic test execution
+
 //! Core library for the `dusttest` test harness.
 //!
 //! This module defines data structures and functions for parsing test
@@ -42,7 +52,8 @@ pub struct TestResult {
 /// Load a configuration file from the given path.
 pub fn load_config(path: &str) -> io::Result<Vec<TestSpec>> {
     let content = fs::read_to_string(path)?;
-    let config: Config = toml::from_str(&content).map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+    let config: Config =
+        toml::from_str(&content).map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
     Ok(config.tests)
 }
 
@@ -131,7 +142,11 @@ pub fn run_tests(tests: &[TestSpec], seeds: &[u64], verbose: bool) -> Vec<TestRe
 /// Format the summary of test results into a human readable string.
 pub fn format_summary(results: &[TestResult], base_seed: u64) -> String {
     let mut summary = String::new();
-    summary.push_str(&format!("Running {} tests with base seed {}\n", results.len(), base_seed));
+    summary.push_str(&format!(
+        "Running {} tests with base seed {}\n",
+        results.len(),
+        base_seed
+    ));
     let mut all_pass = true;
     for result in results {
         if result.total_runs == 0 {
@@ -139,10 +154,16 @@ pub fn format_summary(results: &[TestResult], base_seed: u64) -> String {
             continue;
         }
         if result.failing_seeds.is_empty() {
-            summary.push_str(&format!("Test {}: pass on {}/{} seeds\n", result.name, result.successes, result.total_runs));
+            summary.push_str(&format!(
+                "Test {}: pass on {}/{} seeds\n",
+                result.name, result.successes, result.total_runs
+            ));
         } else {
             all_pass = false;
-            summary.push_str(&format!("Test {}: pass on {}/{} seeds (failures on seeds: {:?})\n", result.name, result.successes, result.total_runs, result.failing_seeds));
+            summary.push_str(&format!(
+                "Test {}: pass on {}/{} seeds (failures on seeds: {:?})\n",
+                result.name, result.successes, result.total_runs, result.failing_seeds
+            ));
         }
     }
     if all_pass {

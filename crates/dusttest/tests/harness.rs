@@ -1,3 +1,12 @@
+// File: harness.rs - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   Test suite for dusttest harness functionality.
+//   Tests include:
+//     - seeds_generation: Verify seed sequence generation
+//     - run_tests: Test execution under deterministic seeds
+//     - Configuration loading and parsing
+
 use std::fs::{self, File};
 use std::io::Write;
 use std::path::PathBuf;
@@ -23,7 +32,11 @@ fn run_tests_with_dummy_script() {
         let mut f = File::create(&script_path).expect("create dummy script");
         // The script exits 0 if seed is 1, otherwise non-zero
         writeln!(f, "#!/bin/sh").unwrap();
-        writeln!(f, "if [ \"$DUST_SEED\" -eq 1 ]; then exit 0; else exit 1; fi").unwrap();
+        writeln!(
+            f,
+            "if [ \"$DUST_SEED\" -eq 1 ]; then exit 0; else exit 1; fi"
+        )
+        .unwrap();
     }
     // Build test specification
     let spec = TestSpec {

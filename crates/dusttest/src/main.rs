@@ -1,3 +1,11 @@
+// File: main.rs - This file is part of the DPL Toolchain
+// Copyright (c) 2026 Dust LLC, and Contributors
+// Description:
+//   CLI for `dusttest` test harness.
+//   Reads configuration file (default: dusttest.toml).
+//   Determines seed sequence and executes each test command under each seed.
+//   Reports pass/fail counts and per-seed output.
+
 //! Command‑line interface for the `dusttest` harness.
 //!
 //! This binary reads a configuration file (defaulting to `dusttest.toml`),
@@ -15,7 +23,9 @@ fn print_help() {
     println!("");
     println!("USAGE: dusttest [OPTIONS]\n");
     println!("Options:");
-    println!("    --config <FILE>    Path to a custom configuration file (defaults to dusttest.toml)");
+    println!(
+        "    --config <FILE>    Path to a custom configuration file (defaults to dusttest.toml)"
+    );
     println!("    --seed <INT>       Use a specific seed instead of a random one");
     println!("    --ensemble <N>     Run each test N times with different seeds");
     println!("    --list             List tests without running them");
