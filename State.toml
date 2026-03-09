@@ -1,0 +1,14 @@
+# Dusttest - DPL Test Harness Workspace Manifest
+
+[workspace]
+name = "dusttest"
+version = "0.2.0"
+description = "Dust-native deterministic test harness profile"
+
+[sector]
+name = "dusttest"
+path = "src"
+
+[target.x64-pc-none]
+linker = "ld"
+linker_flags = ["-nostdlib", "-static"]

@@ -1,0 +1,10 @@
+## Example configuration artifact retained for dusttest harness semantics.
+## Commands are examples and not executed by the top-level K main smoke profile.
+
+[[test]]
+name = "formatting"
+cmd = "dustfmt tests/fixtures/example1.dust"
+
+[[test]]
+name = "docs"
+cmd = "dustdoc --html tests/fixtures/example2.dust"
